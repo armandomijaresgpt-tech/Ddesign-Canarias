@@ -1,0 +1,6 @@
+{
+  "name": "Design Canarias - Estudio de Diseño & Branding",
+  "description": "Estudio boutique de diseño gráfico, branding, rotulación comercial e impresión de alta gama en Canarias. One-pager interactivo de alta conversión.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
