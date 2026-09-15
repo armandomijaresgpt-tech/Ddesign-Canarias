@@ -112,6 +112,32 @@
   }
 }
 
+@keyframes haptic-red-shockwave {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.85), 0 0 15px rgba(239, 68, 68, 0.5);
+    transform: scale(0.94);
+  }
+  40% {
+    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0.3), 0 0 25px rgba(239, 68, 68, 0.2);
+    transform: scale(0.92);
+  }
+  100% {
+    box-shadow: 0 0 0 18px rgba(239, 68, 68, 0), 0 0 0 rgba(239, 68, 68, 0);
+    transform: scale(1);
+  }
+}
+
+.btn-haptic-red {
+  position: relative;
+  transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s cubic-bezier(0.2, 0, 0, 1);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-haptic-red:active {
+  animation: haptic-red-shockwave 0.38s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
 .btn-haptic {
   position: relative;
   transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s cubic-bezier(0.2, 0, 0, 1), background-color 0.2s ease, border-color 0.2s ease;
@@ -167,7 +193,8 @@
   position: relative;
   width: 100%;
   max-width: 100%;
-  height: clamp(62px, 8vw, 76px);
+  /* More fluid scaling: taller on mobile (1-col wider container), compact on desktop */
+  height: clamp(58px, min(9vw, 8vh), 78px);
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -200,7 +227,8 @@
 
 li.looping-words__list {
   width: 100%;
-  height: clamp(20.666px, 2.666vw, 25.333px);
+  /* Match the container height: height / 3 visible slots */
+  height: clamp(19.333px, min(3vw, 2.666vh), 26px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -214,7 +242,8 @@ li.looping-words__list {
   text-transform: uppercase;
   letter-spacing: -0.015em;
   color: #ffffff;
-  font-size: clamp(0.85rem, 2.5vw + 0.3rem, 1.35rem);
+  /* Fluid scale: adapts well from narrow mobile (1-col) to wide desktop */
+  font-size: clamp(0.8rem, min(2.2vw + 0.25rem, 2.8vh), 1.3rem);
   line-height: 1;
   text-align: center;
   white-space: nowrap;

@@ -21,6 +21,8 @@ import { useSound } from '../../context/SoundContext';
 import { NavigationPillMenu } from '../NavigationPillMenu';
 import { LoopingWords } from '../ui/looping-words-with-gsap';
 import { HeroParticleCanvas } from '../HeroParticleCanvas';
+import { GlassDivider } from '../ui/GlassDivider';
+
 
 const SPECIALTIES_WORDS = [
   'Diseño',
@@ -132,9 +134,10 @@ interface ServiceTooltipProps {
 }
 
 const ServiceTooltip: React.FC<ServiceTooltipProps> = ({ product, index }) => {
-  const isTopRow = index < 4;
-  const isLeftCol = index % 4 === 0;
-  const isRightCol = index % 4 === 3;
+  // 3-column grid on desktop: top row = indices 0-2
+  const isTopRow = index < 3;
+  const isLeftCol = index % 3 === 0;
+  const isRightCol = index % 3 === 2;
 
   const positionClasses = isTopRow 
     ? 'top-[calc(100%+8px)]' 
@@ -234,10 +237,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             />
           </AnimatePresence>
 
-          {/* Minimalist studio watermark badge */}
-          <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/20 text-white text-[10px] sm:text-[11px] font-medium tracking-wide shadow-lg">
-            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-            <span className="text-zinc-400 font-normal">Taller Canarias</span>
+          {/* Minimalist studio watermark badge with logo */}
+          <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 px-2 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/20 text-white shadow-lg">
+            {/* Supabase logo thumbnail */}
+            <img
+              src="https://covndikrmfvxscuajrqp.supabase.co/storage/v1/object/public/Logo/logo.jpeg"
+              alt="Design Canarias"
+              className="w-5 h-5 rounded-full object-cover border border-white/30 shrink-0"
+              referrerPolicy="no-referrer"
+              loading="eager"
+            />
+            <span className="text-zinc-400 font-normal text-[10px] sm:text-[11px]">Taller Canarias</span>
             <span className="text-zinc-600">|</span>
             <span className="font-semibold text-white uppercase tracking-wider text-[9px] sm:text-[10px]">{selectedProduct.category}</span>
           </div>
@@ -282,6 +292,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           id="hero-products-button-grid-container"
           className="w-full flex flex-col justify-center gap-2 lg:gap-2.5 relative overflow-visible"
         >
+          {/* Mobile-only GlassDivider: separates hero image (above) from catalog (below) */}
+          <GlassDivider className="lg:hidden py-0.5" />
+
           {/* Prominent 'Solicitar Presupuesto' Button with Hover Lift Effect kept at top position */}
           <div className="w-full flex items-center justify-center">
             <button
@@ -329,8 +342,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </span>
           </div>
 
-          {/* 4-Column Grid for exactly 8 services */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 xs:gap-2 sm:gap-2.5 relative overflow-visible">
+          {/* Responsive Catalog Grid: 1 col mobile → 3 col desktop */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5 sm:gap-2 relative overflow-visible">
             {PRODUCTS.map((product, index) => {
               const isSelected = selectedProduct.id === product.id;
               const IconComponent = product.icon;
@@ -350,7 +363,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                       setSelectedProduct(product);
                     }}
                     onMouseEnter={playHover}
-                    className={`btn-haptic-dark group relative w-full flex flex-col items-center justify-center text-center p-2 xs:p-2.5 sm:p-3 rounded-xl border select-none cursor-pointer min-h-[56px] xs:min-h-[62px] sm:min-h-[80px] lg:min-h-[88px] transition-all duration-200 ease-out hover:scale-105 active:scale-95 ${
+                    className={`btn-haptic-dark group relative w-full
+                      flex flex-row items-center gap-3
+                      sm:flex-col sm:items-center sm:justify-center sm:gap-0
+                      text-left sm:text-center
+                      p-2.5 sm:p-3 rounded-xl border select-none cursor-pointer
+                      min-h-[52px] sm:min-h-[88px]
+                      transition-all duration-200 ease-out hover:scale-[1.02] active:scale-95 ${
                       isSelected
                         ? 'bg-white text-zinc-950 border-white ring-2 ring-white ring-offset-2 ring-offset-[#07080C] shadow-[0_0_24px_rgba(255,255,255,0.35)] opacity-100 z-20 scale-[1.02]'
                         : 'bg-[#101217]/90 border-white/[0.08] text-zinc-400 opacity-80 hover:opacity-100 hover:text-white hover:bg-zinc-800/90 hover:border-white/50 hover:shadow-[0_0_20px_rgba(255,255,255,0.22)] z-10'
@@ -358,26 +377,37 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     aria-pressed={isSelected}
                     title={product.name}
                   >
-                    {/* Icon with contrast adaptation */}
+                    {/* Icon — left-aligned on mobile, centered on desktop */}
                     <IconComponent 
-                      className={`w-4 h-4 sm:w-5 sm:h-5 mb-1 sm:mb-1.5 transition-transform duration-200 group-hover:scale-110 ${
+                      className={`w-5 h-5 sm:mb-1.5 shrink-0 transition-transform duration-200 group-hover:scale-110 ${
                         isSelected ? 'text-zinc-950 stroke-[2.4]' : 'text-zinc-400 group-hover:text-white stroke-[1.8]'
                       }`} 
                     />
 
-                    {/* Non-hyphenated Label */}
-                    <span className={`text-[10.5px] xs:text-[11px] sm:text-xs leading-tight font-bold tracking-tight line-clamp-1 ${
-                      isSelected ? 'text-zinc-950 font-bold' : 'text-zinc-200 group-hover:text-white'
-                    }`}>
-                      {product.name}
-                    </span>
+                    {/* Text block */}
+                    <div className="flex-1 sm:flex-none sm:w-full min-w-0">
+                      <div className="flex items-center gap-1.5 sm:justify-center">
+                        <span className={`font-bold text-xs leading-tight line-clamp-1 ${
+                          isSelected ? 'text-zinc-950' : 'text-zinc-200 group-hover:text-white'
+                        }`}>
+                          {product.name}
+                        </span>
+                      </div>
+                      <span className={`text-[9px] uppercase tracking-wider font-semibold block sm:text-center mt-0.5 line-clamp-1 ${
+                        isSelected ? 'text-zinc-700' : 'text-zinc-500 group-hover:text-zinc-400'
+                      }`}>
+                        {product.category}
+                      </span>
+                    </div>
 
-                    {/* Category subtitle */}
-                    <span className={`text-[8.5px] xs:text-[9px] uppercase tracking-wider font-semibold mt-0.5 line-clamp-1 ${
-                      isSelected ? 'text-zinc-700' : 'text-zinc-500 group-hover:text-zinc-400'
-                    }`}>
-                      {product.category}
-                    </span>
+                    {/* Starting price — only on mobile (1-col gives enough width) */}
+                    <div className="sm:hidden shrink-0 text-right">
+                      <span className={`text-[10.5px] font-bold ${
+                        isSelected ? 'text-zinc-800' : 'text-zinc-400'
+                      }`}>
+                        {product.startingPrice}
+                      </span>
+                    </div>
 
                     {/* Active Selected Visual Indicator: Red Badge */}
                     {isSelected && (
@@ -389,15 +419,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                       </div>
                     )}
 
-                    {/* Active Bottom Strip Bar Indicator */}
+                    {/* Active Bottom Strip Bar — desktop only */}
                     {isSelected && (
                       <motion.div 
                         layoutId="activeHeroButtonIndicator"
-                        className="absolute bottom-1 w-6 h-0.5 rounded-full bg-zinc-950" 
+                        className="absolute bottom-1 w-6 h-0.5 rounded-full bg-zinc-950 hidden sm:block" 
                         transition={{ type: 'spring', stiffness: 500, damping: 35 }}
                       />
                     )}
                   </button>
+
 
                   {/* Tooltip Component */}
                   <AnimatePresence>
@@ -410,8 +441,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             })}
           </div>
 
+          {/* GlassDivider between catalog grid and LoopingWords */}
+          <GlassDivider className="my-0.5" />
+
           {/* Looping Words Interactive Card with Canvas Particles MOVED BELOW THE CATALOG */}
           <div className="relative w-full rounded-2xl p-1.5 sm:p-2 bg-zinc-950/80 border border-white/[0.12] backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.85)] flex flex-col items-center justify-center overflow-hidden my-1 sm:my-0">
+
             {/* Subtle Interactive Particle Canvas strictly behind LoopingWords */}
             <HeroParticleCanvas className="pointer-events-none" />
 

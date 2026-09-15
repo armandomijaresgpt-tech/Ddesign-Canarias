@@ -160,10 +160,10 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => 
             </Tooltip>
           </div>
 
-          {/* CENTER: Mi Panel PRO + Centered Embossed Logo + Cotizar Ahora (MATHEMATICALLY DEAD CENTER ON MOBILE & DESKTOP) */}
+          {/* CENTER: Mi Panel PRO + Centered Embossed Logo + Cotizar Ahora */}
           <div 
             id="header-center-action-pod"
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center gap-1.5 sm:gap-2.5 z-20 pointer-events-auto"
+            className="flex items-center justify-center gap-1.5 sm:gap-2.5 z-20 pointer-events-auto shrink-0"
           >
             {/* Mi Panel PRO Button - HIDDEN ON MOBILE */}
             <Tooltip content="Acceso a panel de clientes, pedidos, facturas y seguimiento" position="bottom" shortcut="PRO">
@@ -175,12 +175,11 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => 
                   setLoginModalOpen(true);
                 }}
                 onMouseEnter={playHover}
-                className="hidden sm:flex btn-haptic-dark group relative h-8 sm:h-9 px-2.5 sm:px-3.5 rounded-lg sm:rounded-xl bg-zinc-900/90 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-white/10 hover:border-white/30 text-[11px] sm:text-xs font-semibold transition-all duration-200 cursor-pointer whitespace-nowrap shadow-sm items-center gap-1 sm:gap-2 active:scale-95"
+                className="hidden lg:flex btn-haptic-dark group relative h-8 sm:h-9 px-2.5 sm:px-3 rounded-lg sm:rounded-xl bg-zinc-900/90 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-white/10 hover:border-white/30 text-[11px] font-semibold transition-all duration-200 cursor-pointer whitespace-nowrap shadow-sm items-center gap-1.5 active:scale-95"
               >
-                <UserCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-zinc-300 group-hover:text-white transition-colors shrink-0" />
-                <span className="hidden xs:inline">Mi Panel</span>
-                <span className="xs:hidden">Panel</span>
-                <span className="text-[8.5px] sm:text-[9px] px-1 sm:px-1.5 py-0.5 rounded font-black tracking-wider bg-white/15 text-white border border-white/20 group-hover:bg-white group-hover:text-zinc-950 transition-colors">
+                <UserCircle className="w-3.5 h-3.5 text-zinc-300 group-hover:text-white transition-colors shrink-0" />
+                <span>Mi Panel</span>
+                <span className="text-[9px] px-1.5 py-0.5 rounded font-black tracking-wider bg-white/15 text-white border border-white/20 group-hover:bg-white group-hover:text-zinc-950 transition-colors">
                   PRO
                 </span>
               </button>
@@ -192,7 +191,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => 
                 id="brand-logo-btn"
                 onClick={() => handleSelectSection('hero')}
                 onMouseEnter={playHover}
-                className="group relative flex items-center justify-center focus:outline-none cursor-pointer shrink-0"
+                className="group relative flex items-center justify-center focus:outline-none cursor-pointer shrink-0 mx-1 sm:mx-2"
                 aria-label="Design Canarias - Inicio"
               >
                 {/* Outer Circular Relief Bezel & Lighting */}
@@ -204,44 +203,13 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => 
                     {/* Upper Curvature Glass/Light Sheen */}
                     <div className="absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent rounded-t-full pointer-events-none" />
                     
-                    {/* Precision Sculpted Logo Mark with Depth */}
-                    <svg 
-                      viewBox="0 0 40 40" 
-                      className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5 drop-shadow-[0_2px_3px_rgba(0,0,0,0.9)] relative z-10 transition-transform duration-200 group-hover:scale-110" 
-                      fill="none"
-                    >
-                      <defs>
-                        <linearGradient id="dcReliefGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#FFFFFF" />
-                          <stop offset="50%" stopColor="#E4E4E7" />
-                          <stop offset="100%" stopColor="#A1A1AA" />
-                        </linearGradient>
-                        <linearGradient id="dcBevelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.5" />
-                          <stop offset="100%" stopColor="#000000" stopOpacity="0.8" />
-                        </linearGradient>
-                      </defs>
-
-                      {/* Concentric relief inner ring */}
-                      <circle cx="20" cy="20" r="17.5" stroke="url(#dcBevelGrad)" strokeWidth="0.8" opacity="0.7" />
-
-                      {/* D Monogram Letterform */}
-                      <path 
-                        d="M11 11.5 H18.5 C22.8 11.5 26 14.8 26 20 C26 25.2 22.8 28.5 18.5 28.5 H11 V11.5 Z M14.8 15.2 V24.8 H18.2 C20.8 24.8 22.4 22.8 22.4 20 C22.4 17.2 20.8 15.2 18.2 15.2 H14.8 Z" 
-                        fill="url(#dcReliefGrad)"
-                      />
-
-                      {/* C Counter-arc with light reflex */}
-                      <path 
-                        d="M24 14 C26.2 15.6 27.5 17.6 27.5 20 C27.5 22.4 26.2 24.4 24 26" 
-                        stroke="#FFFFFF" 
-                        strokeWidth="2.4" 
-                        strokeLinecap="round"
-                      />
-
-                      {/* Archipelago Focal Light Point */}
-                      <circle cx="29" cy="13" r="1.4" fill="#FFFFFF" className="animate-pulse" />
-                    </svg>
+                    {/* Real Logo Image */}
+                    <img 
+                      src="https://covndikrmfvxscuajrqp.supabase.co/storage/v1/object/public/Logo/logo.jpeg"
+                      alt="Design Canarias Logo"
+                      className="w-full h-full object-cover relative z-10 transition-transform duration-200 group-hover:scale-110"
+                      referrerPolicy="no-referrer"
+                    />
 
                     {/* Micro Ambient Glow behind icon */}
                     <div className="absolute inset-0 bg-white/5 rounded-full blur-[2px] pointer-events-none" />
@@ -250,14 +218,14 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => 
               </button>
             </Tooltip>
 
-            {/* Cotizar Ahora CTA Button - Visible on sm and up */}
+            {/* Cotizar Ahora CTA Button - Visible on lg and up */}
             <Tooltip content="Calculadora interactiva de presupuestos en 60 segundos" position="bottom" shortcut="⚡">
               <button
                 id="header-cta-quote-btn"
                 type="button"
                 onClick={() => handleSelectSection('cotizador')}
                 onMouseEnter={playHover}
-                className="hidden sm:flex btn-haptic relative group overflow-hidden h-9 px-3.5 sm:px-4 rounded-xl bg-white hover:bg-zinc-200 text-zinc-950 font-bold text-xs tracking-tight shadow-sm shadow-white/10 transition-all duration-200 focus:outline-none cursor-pointer border border-white whitespace-nowrap items-center gap-1.5 active:scale-95"
+                className="hidden lg:flex btn-haptic relative group overflow-hidden h-9 px-3.5 rounded-xl bg-white hover:bg-zinc-200 text-zinc-950 font-bold text-[11px] tracking-tight shadow-sm shadow-white/10 transition-all duration-200 focus:outline-none cursor-pointer border border-white whitespace-nowrap items-center gap-1.5 active:scale-95"
               >
                 <Calculator className="w-3.5 h-3.5 shrink-0" />
                 <span>Cotizar Ahora</span>

@@ -88,30 +88,13 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
           className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full p-[2px] bg-gradient-to-b from-white/40 via-zinc-700 to-black shadow-[0_8px_30px_rgba(0,0,0,0.9),inset_0_2px_3px_rgba(255,255,255,0.4)] mb-8"
         >
           <div className="w-full h-full rounded-full bg-gradient-to-b from-zinc-800 via-[#101217] to-zinc-950 flex items-center justify-center border border-white/20 relative overflow-hidden">
-            <svg 
-              viewBox="0 0 40 40" 
-              className="w-8 h-8 sm:w-10 sm:h-10 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]" 
-              fill="none"
-            >
-              <defs>
-                <linearGradient id="dcReliefLoader" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#FFFFFF" />
-                  <stop offset="50%" stopColor="#E4E4E7" />
-                  <stop offset="100%" stopColor="#A1A1AA" />
-                </linearGradient>
-              </defs>
-              <path 
-                d="M11 11.5 H18.5 C22.8 11.5 26 14.8 26 20 C26 25.2 22.8 28.5 18.5 28.5 H11 V11.5 Z M14.8 15.2 V24.8 H18.2 C20.8 24.8 22.4 22.8 22.4 20 C22.4 17.2 20.8 15.2 18.2 15.2 H14.8 Z" 
-                fill="url(#dcReliefLoader)"
-              />
-              <path 
-                d="M24 14 C26.2 15.6 27.5 17.6 27.5 20 C27.5 22.4 26.2 24.4 24 26" 
-                stroke="#FFFFFF" 
-                strokeWidth="2.4" 
-                strokeLinecap="round"
-              />
-              <circle cx="29" cy="13" r="1.5" fill="#FFFFFF" className="animate-pulse" />
-            </svg>
+            {/* Real Logo Image */}
+            <img 
+              src="https://covndikrmfvxscuajrqp.supabase.co/storage/v1/object/public/Logo/logo.jpeg"
+              alt="Design Canarias Logo"
+              className="w-full h-full object-cover relative z-10"
+              referrerPolicy="no-referrer"
+            />
           </div>
         </motion.div>
 

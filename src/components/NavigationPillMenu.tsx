@@ -45,7 +45,7 @@ export const NavigationPillMenu: React.FC<NavigationPillMenuProps> = ({
   return (
     <nav 
       id="navigation-pill-menu"
-      className={`flex items-center overflow-x-auto no-scrollbar scroll-smooth p-1 sm:p-1.5 rounded-2xl sm:rounded-full bg-zinc-900/95 border border-white/[0.14] backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.85),0_0_20px_rgba(255,255,255,0.04)] gap-1 sm:gap-1.5 justify-start sm:justify-between max-w-full ${className}`}
+      className={`flex items-center overflow-x-auto no-scrollbar scroll-smooth p-1 sm:p-1.5 rounded-2xl sm:rounded-full bg-zinc-900/95 border border-white/[0.14] backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.85),0_0_20px_rgba(255,255,255,0.04)] gap-1 sm:gap-1.5 justify-start sm:justify-center max-w-full ${className}`}
       style={{ touchAction: 'pan-x' }}
     >
       {navMenuItems.map((item) => {
@@ -57,7 +57,7 @@ export const NavigationPillMenu: React.FC<NavigationPillMenuProps> = ({
             content={item.tooltip}
             position="bottom"
             shortcut={item.badge}
-            className="shrink-0 sm:flex-1"
+            className="shrink-0"
           >
             <button
               id={`nav-pill-btn-${item.id}`}
